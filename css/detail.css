@@ -22,6 +22,8 @@
 }
 .product__image{
     /* background: blue; */
+    
+    
     width: var(--layout-imagen-width-detail);
     height: var(--layout-imagen-height-detail);
     border-radius: 20px;
