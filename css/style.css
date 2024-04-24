@@ -60,6 +60,7 @@
     user-select: none;
     cursor: pointer;
 }
+
 .nav__filter{
     background: var(--color-1);
     width: 40px;
@@ -108,9 +109,12 @@
     border: 1px solid var(--color-3);
     color: var(--color-1);
     background: var(--color-5);
+
 }
 .nav__ul li a:hover{
-    filter: invert(1);
+    /* filter: invert(1); */
+    transition: all 2s ease 0.2s;
+    background-color: blueviolet;
 }
 .footer{
     /* background: red; */
