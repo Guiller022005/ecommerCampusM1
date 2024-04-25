@@ -181,7 +181,12 @@
 }
 .section__front_page img{
     position: absolute;
+    transition: transform 0.3s ease;
 }
+.section__front_page img:hover{
+    transform: scale(1.1);
+}
+
 .section__front_page a img:first-child{
     width:var(--layout-imagen-width);
     height: var(--layout-imagen-height);
