@@ -12,9 +12,9 @@ export const getAllProductName = async({search:text} = {search:"Phone"})=>{
     return data;
 }
 
-export const getAllCategory = async()=>{
+export const getAllCategory = async() => {
     console.log("Esperando .........");
-    const url = `https://real-time-amazon-data.p.rapidapi.com/product-category?list?country=US`;
+    const url = `https://real-time-amazon-data.p.rapidapi.com/product-category-list?country=US`;
     const options = {
         method: 'GET',
         headers

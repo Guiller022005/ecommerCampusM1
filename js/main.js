@@ -7,20 +7,21 @@ let [p, span]= header__information.children;
 
 span.innerHTML = "Guillermo Paúl";*/
 
-let input__search = document.querySelector("#input__Search");
+let input__Search = document.querySelector("#input_Search");
 let main__article = document.querySelector("#main__article");
 let nav__ul = document.querySelector(".nav__ul");
 
-addEventListener("DOMContentLoaded", (e)=>{
-    
+addEventListener("DOMContentLoaded", async e=>{
+    let data = await getAllCategory();
+    nav__ul.innerHTML = await menulistCategoryIndex(data);
 })
 
-input__search.addEventListener("change", async e => {
-    let data = { search : e.target.value};
-    input__search.value = null;
+input__Search.addEventListener("change", async (e) => {
+    let data = { search : e.target.value}
+    input__Search.value = null;
 
     let res = await getAllProductName(data)
-    main__article.innerHTML += galleryIndex(res);
+    main__article.innerHTML = galleryIndex(res);
 
     //let data = {search : e.target.value};
     //let res = await getAllProductName(data);

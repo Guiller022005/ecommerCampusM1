@@ -97,7 +97,7 @@
 }
 .nav__ul li a{
     /* background: orange; */
-    width: 105px;
+    width: 125px;
     height: 35px;
     font-family: "EncodeSans-Medium";
     display: flex;
@@ -115,6 +115,11 @@
     /* filter: invert(1); */
     transition: all 2s ease 0.2s;
     background-color: blueviolet;
+}
+.nav__ul li a span{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .footer{
     /* background: red; */
