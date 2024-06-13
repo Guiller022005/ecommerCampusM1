@@ -4,8 +4,8 @@ export const menulistCategoryIndex = (res)=>{
     data.forEach((value, index) => {
         plantilla += /*html*/ `
         <li title="${value.name}">
-            <a href="#" >
-                <img src="storage/img/categoryHover.svg" alt="Category Icon"></img>
+            <a href="?id=${value.id}" >
+                <img src="storage/img/categoryHover.svg" >
                 <span>${value.name}</span>
             </a>
         </li>
