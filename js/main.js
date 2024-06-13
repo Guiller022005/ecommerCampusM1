@@ -8,7 +8,7 @@ let [p, span]= header__information.children;
 span.innerHTML = "Guillermo Paúl";*/
 
 let input__Search = document.querySelector("#input_Search");
-let main__article = document.querySelector("#main__article");
+let main__article = document.querySelector(".main__article");
 let nav__ul = document.querySelector(".nav__ul");
 
 addEventListener("DOMContentLoaded", async e=>{
