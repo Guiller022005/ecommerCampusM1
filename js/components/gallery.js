@@ -35,7 +35,7 @@ export const galleryCategory = ({data: {product_photos}} = res)=>{
                 <a href="../">
                     <img src="../storage/img/back.svg">
                 </a>
-                <img src="../storage/img/heartBlack.svg">
+                <img src="../storage/img/heartblack.svg">
             </div>
         </article>`;
 }
