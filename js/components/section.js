@@ -33,4 +33,22 @@ export const infoProductDetail = async({ data:dataUpdate } = res) => {
         <p id="parrafo" >${await description()}</p>
     </article>
     `;
-}       
+}
+
+export const priceProductDetail = async({ data:dataUpdate } = res) => {
+    let precio = async()=>{
+        let text = dataUpdate.product_price;
+        let price = text.toString();
+        return price;
+    }
+    return /*html*/`
+    <ul class="footer__ul">
+            <li>
+                <a href="./checkout.html">
+                    <img src="../storage/img/shoppingcar.svg">
+                    <span>Add to Cart | ${await precio()} <sub><del>${dataUpdate.product_original_price}</del></sub></span>
+                </a>
+            </li>
+        </ul>
+    `;
+}

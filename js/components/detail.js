@@ -1,11 +1,12 @@
 import { getProductId } from "../module/detail.js";
-import { titleProductDetail, infoProductDetail } from "./section.js";
+import { titleProductDetail, infoProductDetail, priceProductDetail } from "./section.js";
 import { galleryCategory } from "./gallery.js";
 
 
 let main__section_gallery = document.querySelector("#main__section_gallery");
 let main__section__title = document.querySelector("#main__section__title");
 let main__section__information = document.querySelector("#main__section__information");
+let main__section__price = document.querySelector("#footer__section__price");
 
 addEventListener("DOMContentLoaded", async(e)=>{
     let params = new URLSearchParams(location.search);
@@ -15,6 +16,7 @@ addEventListener("DOMContentLoaded", async(e)=>{
     main__section_gallery.innerHTML = await galleryCategory(info);
     main__section__title.innerHTML = await titleProductDetail(info);
     main__section__information.innerHTML = await infoProductDetail(info);
+    main__section__price.innerHTML = await priceProductDetail(info);
     // let {data} = res;
     // let {
     //     category_path,
