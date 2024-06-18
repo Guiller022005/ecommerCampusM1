@@ -17,38 +17,27 @@ export const titleProductDetail = async({ data:dataUpdate } = res)=>{
         </article>`;
 }
 
-export const infoProductDetail = async({ data:dataUpdate } = res) => {
-    let description = async()=>{
-        let text = dataUpdate.product_description;
-        let description = text.toString();
-        
-        if (description.length > 150) {
-            description = description.slice(0,150)+'<strong id="readMoreButton" >Read More. . .</strong>';
-        }
-        return description;
-    }
-    
-    return /*html*/`
-    <article class="product__information">
-        <p id="parrafo" >${await description()}</p>
-    </article>
-    `;
-}
+export const productDetail = async(res)=>{
+    let {data} = res;
+    let {
+        category_path,
+        about_product,
+        product_details,
+        product_information,
+        product_photos,
+        product_variations,
+        rating_distribution,
+        review_aspects,
+        ...dataUpdate
+    } = data;
+    // console.log(dataUpdate);
+    let string1 = dataUpdate.product_description.slice(0, 165);
+    let string2 = dataUpdate.product_description.slice(166);
 
-export const priceProductDetail = async({ data:dataUpdate } = res) => {
-    let precio = async()=>{
-        let text = dataUpdate.product_price;
-        let price = text.toString();
-        return price;
-    }
+
     return /*html*/`
-    <ul class="footer__ul">
-            <li>
-                <a href="./checkout.html">
-                    <img src="../storage/img/shoppingcar.svg">
-                    <span>Add to Cart | ${await precio()} <sub><del>${dataUpdate.product_original_price}</del></sub></span>
-                </a>
-            </li>
-        </ul>
-    `;
+    <details>
+        <summary>${(dataUpdate.product_description.length >= 165) ? string1+"..." : string1}</summary>
+        <p>${string2}</p>
+    </details>`;
 }

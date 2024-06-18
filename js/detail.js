@@ -1,12 +1,13 @@
-import { getProductId } from "../module/detail.js";
-import { titleProductDetail, infoProductDetail, priceProductDetail } from "./section.js";
-import { galleryCategory } from "./gallery.js";
+import { buttonCartDetails } from "./components/footer.js";
+import { getProductId } from "./module/detail.js";
+import { titleProductDetail, productDetail } from "./components/section.js";
+import { galleryCategory } from "./components/gallery.js";
 
 
 let main__section_gallery = document.querySelector("#main__section_gallery");
 let main__section__title = document.querySelector("#main__section__title");
-let main__section__information = document.querySelector("#main__section__information");
-let main__section__price = document.querySelector("#footer__section__price");
+let product__information = document.querySelector(".product__information");
+let footer__ul = document.querySelector(".footer__ul");
 
 addEventListener("DOMContentLoaded", async(e)=>{
     let params = new URLSearchParams(location.search);
@@ -15,8 +16,8 @@ addEventListener("DOMContentLoaded", async(e)=>{
     let info = JSON.parse(localStorage.getItem(id));
     main__section_gallery.innerHTML = await galleryCategory(info);
     main__section__title.innerHTML = await titleProductDetail(info);
-    main__section__information.innerHTML = await infoProductDetail(info);
-    main__section__price.innerHTML = await priceProductDetail(info);
+    product__information.innerHTML = await productDetail(info);
+    footer__ul.innerHTML = await buttonCartDetails(info);
     // let {data} = res;
     // let {
     //     category_path,
@@ -30,13 +31,4 @@ addEventListener("DOMContentLoaded", async(e)=>{
     //     ...dataUpdate
     // } = data;
     // console.log(dataUpdate);
-
-    let parrafo = document.querySelector("#parrafo");
-    
-    document.addEventListener("click", (e) => {
-        if (e.target && e.target.id === "readMoreButton") {
-            let info_completed = info.data.product_description;
-            parrafo.innerHTML = info_completed;
-        }
-    });
 })
