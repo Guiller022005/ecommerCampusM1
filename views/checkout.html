@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
     <link rel="stylesheet" href="../css/checkout.css">
+    <script type="module" src="../js/checkout.js" defer></script>
 </head>
 <body>
     <header class="header">
@@ -23,60 +24,28 @@
     </header>
     <main class="main">
         <section class="checkout__details">
-            <arcticle class="details__product">
+            <!-- <arcticle class="details__product">
                 <div class="product__imagen">
                     <img src="../storage/img/chekoutima1.svg">
                 </div>
                 <div class="product__description">
-                    <h3><strong>Modern light clothes</strong></h3>
+                    <h3>Modern light clothes</h3>
                     <small>Dress modern</small>
                     <span>$212.22</span>
                 </div>
                 <div class="product__custom">
                     <img src="../storage/img/3puntos.svg">
                     <div class="product__select">
-                        <img src="../storage/img/checkout minus.svg">
+                        <a href:"" id='aumentar'>
+                            <img src="../storage/img/checkout minus.svg">
+                        </a>
                         <span>4</span>
-                        <img src="../storage/img/chekout plus.svg">
+                        <a href:"" id='disminuir'>
+                            <img src="../storage/img/chekout plus.svg">
+                        </a>
                     </div>
                 </div>
-            </arcticle>
-            <arcticle class="details__product">
-                <div class="product__imagen">
-                    <img src="../storage/img/checkout ima2.svg">
-                </div>
-                <div class="product__description">
-                    <h3><strong>Modern light clothes</strong></h3>
-                    <small>Dress modern</small>
-                    <span>$212.22</span>
-                </div>
-                <div class="product__custom">
-                    <img src="../storage/img/3puntos.svg">
-                    <div class="product__select">
-                        <img src="../storage/img/checkout minus.svg">
-                        <span>4</span>
-                        <img src="../storage/img/chekout plus.svg">
-                    </div>
-                </div>
-            </arcticle>
-            <arcticle class="details__product">
-                <div class="product__imagen">
-                    <img src="../storage/img/chekout ima3.svg">
-                </div>
-                <div class="product__description">
-                    <h3><strong>Modern light clothes</strong></h3>
-                    <small>Dress modern</small>
-                    <span>$212.22</span>
-                </div>
-                <div class="product__custom">
-                    <img src="../storage/img/3puntos.svg">
-                    <div class="product__select">
-                        <img src="../storage/img/checkout minus.svg">
-                        <span>4</span>
-                        <img src="../storage/img/chekout plus.svg">
-                    </div>
-                </div>
-            </arcticle>
+            </arcticle> -->
         </section>
         <section class="section__shopping">
             <article class="Shopping__title">
@@ -110,9 +79,9 @@
                 </div>
             </article>
             <article class="section__bill">
-                <div class="bill__total">
-                    <label>Total (9 items)</label>
-                    <span>$131.97</span>
+                <!-- <div class="bill__total">
+                    <label>Total (${totalItems} items)</label>
+                    <span>$${totalPrice.toFixed(2)}</span>
                 </div>
                 <div class="bill__fee">
                     <label>Shipping Fee</label>
@@ -120,8 +89,8 @@
                 </div>
                 <div class="bill__subtotal">
                     <label>Sub Total</label>
-                    <span>$131.97</span>
-                </div>
+                    <span>$${totalPrice.toFixed(2)}</span>
+                </div> -->
             </article>
         </section>
     </main>

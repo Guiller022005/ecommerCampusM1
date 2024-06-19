@@ -1,7 +1,7 @@
-export const menulistCategoryIndex = (res)=>{
+export const menulistCategoryIndex = async (res)=>{
     let {data} = res;
     let plantilla = "";
-    data.forEach((value, index) => {
+    data.forEach(value => {
         plantilla += /*html*/ `
         <li title="${value.name}">
             <a href="?id=${value.id}" >

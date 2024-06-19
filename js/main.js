@@ -1,6 +1,7 @@
 import { menulistCategoryIndex } from "./components/menu.js";
 import { galleryIndex } from "./components/gallery.js";
-import { getAllProductName, getAllCategory, getAllProductRandom } from "./module/app.js";
+import { getAllProductsName, getAllCategory, getAllProductRandom } from "./module/app.js";
+import { getProductId } from "./module/detail.js";
 
 /*let header__information = document.querySelector(".header__information")
 let [p, span]= header__information.children;
@@ -24,7 +25,7 @@ let searchProducts = async e => {
         console.log(dataSearch);
     }
     else {
-        res = await getAllProductName(dataSearch)
+        res = await getAllProductsName(dataSearch)
         console.log(dataSearch);
     }
     console.log(res);
@@ -53,31 +54,5 @@ addEventListener("DOMContentLoaded", async e=>{
     const eventoChange = new Event('change');
     input__search.dispatchEvent(eventoChange);
 })
-
-input__search.addEventListener("change", async e => {
-    let params = new URLSearchParams(location.search);
-    let data = { search : e.target.value, id: params.get('id')}
-    input__search.value = null;
-    let res = await getAllProductName(data)
-    main__article.innerHTML = galleryIndex(res, params.get('id'));
-
-    //let data = {search : e.target.value};
-    //let res = await getAllProductName(data);
-    //console.log(res);
-
-    let {data: {products}} = res;
-    let asin = products.map(value => {return {id: value.asin}});
-
-    let proceso = new Promise(async(resolve, reject)=>{
-        for (let i = 0; i < asin.length; i++) {
-            if(localStorage.getItem(asin[i].id)) continue;
-            let data = await getProductId(asin[i])
-            localStorage.setItem(asin[i].id, JSON.stringify(data))
-        }
-        resolve({message: "Datos buscados correctamente"});
-    })
-    Promise.all([proceso]).then(res => {console.log(res);})
-    
-});
 
 input__search.addEventListener("change", searchProducts);

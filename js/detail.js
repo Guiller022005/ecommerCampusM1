@@ -1,6 +1,6 @@
 import { buttonCartDetails } from "./components/footer.js";
 import { getProductId } from "./module/detail.js";
-import { titleProductDetail, productDetail } from "./components/section.js";
+import { buttonAtcProductDetial,titleProductDetail, productDetail } from "./components/section.js";
 import { galleryCategory } from "./components/gallery.js";
 
 
@@ -8,20 +8,32 @@ let main__section_gallery = document.querySelector("#main__section_gallery");
 let main__section__title = document.querySelector("#main__section__title");
 let product__information = document.querySelector(".product__information");
 let footer__ul = document.querySelector(".footer__ul");
+let info = "";
+let prueba = {};
+let amount = 1;
 
 addEventListener("DOMContentLoaded", async(e)=>{
     let params = new URLSearchParams(location.search);
     let id = params.get('id');
     if(!localStorage.getItem(id)) localStorage.setItem(id, JSON.stringify(await getProductId({id})));
-    
     let info = JSON.parse(localStorage.getItem(id));
+    console.log(info);
+    prueba.Producto = info;
+    console.log('Info');
+    console.log(prueba.Producto);
+    
     main__section_gallery.innerHTML = await galleryCategory(info);
     main__section__title.innerHTML = await titleProductDetail(info);
+
     let btn_minus = document.querySelector("#btn_minus");
     let btn_plus = document.querySelector("#btn_plus");
 
     product__information.innerHTML = await productDetail(info);
     footer__ul.innerHTML = await buttonCartDetails(info);
+
+    btn_minus.addEventListener("click",quantity)
+    btn_plus.addEventListener("click",quantity)
+
     // let {data} = res;
     // let {
     //     category_path,
@@ -35,8 +47,23 @@ addEventListener("DOMContentLoaded", async(e)=>{
     //     ...dataUpdate
     // } = data;
     // console.log(dataUpdate);
-    btn_minus.addEventListener("click",quantity)
-    btn_plus.addEventListener("click",quantity)
+})
+
+footer__ul.addEventListener("click", async (e) =>{
+    let params = new URLSearchParams(location.search);
+    let id = params.get('id');
+    console.log(id)
+    if(!sessionStorage.getItem(prueba.Producto)) {
+        prueba.Producto.data.quantity = amount;
+        // e.preventDefault();
+        prueba.Producto.data.product_price = prueba.Producto.data.product_price.replace(/^\$/, '');
+        if(prueba.Producto.data.product_original_price){
+            prueba.Producto.data.product_original_price = prueba.Producto.data.product_original_price.replace(/^\$/, '');
+        }        
+        sessionStorage.setItem(id,JSON.stringify(prueba.Producto));
+    }
+    let info = JSON.parse(sessionStorage.getItem(id));
+    console.log(info)
 })
 
 const quantity = async (e)=>{
