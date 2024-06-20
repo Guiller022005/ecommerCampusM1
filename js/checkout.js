@@ -50,7 +50,7 @@ addEventListener("DOMContentLoaded", async (e) => {
         let unitPrice = parseFloat(unitPriceElements[index].getAttribute('data-price'));
 
         decrementButton.addEventListener("click", (e) => {
-            e.preventDefault(); // Prevenir el comportamiento por defecto del enlace
+            e.preventDefault(); 
             let currentValue = parseInt(counterValue.textContent);
             if (currentValue > 1) {
                 counterValue.textContent = currentValue - 1;
@@ -62,7 +62,6 @@ addEventListener("DOMContentLoaded", async (e) => {
 });
 
 
-// Función para actualizar la sección de la factura
 const updateBillSection = async () => {
     let totalItems = 0;
     let totalPrice = 0;

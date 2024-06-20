@@ -113,14 +113,14 @@ export const productDetail = async(res)=>{
 
     if (dataUpdate.product_description) {
         string1 = dataUpdate.product_description.slice(0, 165);
-        string2 = dataUpdate.product_description.slice(166);
+        string2 = dataUpdate.product_description.slice(165);
     }else{
         string1=("Not description")
     }
 
     return /*html*/`
     <details>
-        <summary>${( dataUpdate.product_description && dataUpdate.product_description.length >= 165) ? string1+"..." : string1}</summary>
+        <summary>${( dataUpdate.product_description && dataUpdate.product_description.length >= 165) ? string1+"...<b>Read more</b>" : string1}</summary>
         <p>${string2}</p>
     </details>`;
 }
