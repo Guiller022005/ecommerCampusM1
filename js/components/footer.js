@@ -25,3 +25,36 @@ export const buttonCartDetails = async(res)=>{
         </a>
     </li>`;
 }
+
+export const footerIndex = async (res) =>{
+    let plantilla =""
+    let valTotalItems = "";
+    if (res.totalItems > 0) {
+        valTotalItems = res.totalItems;
+    } 
+    
+
+    plantilla += /*html*/`
+    <li>
+    <a href="#">
+        <img src="storage/img/homeSelect.svg" alt="">
+    </a>
+    </li>
+    <li>
+        <a href="views/checkout.html">
+            <span style ="color: white" >${valTotalItems} </span>
+            <img src="storage/img/bag.svg" alt="">
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <img src="storage/img/heart.svg" alt="">
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <img src="storage/img/profile.svg" alt="">
+        </a>
+    </li>`
+    return plantilla;
+}
