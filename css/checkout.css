@@ -18,7 +18,7 @@
 }
 .header__nav div:nth-child(2){
     font-family: "EncodeSans-SemiBold";
-    color: var(--color-2);
+    color: var(--color-4);
 }
 
 
@@ -64,7 +64,7 @@
 .product__description h3{
     font-size: 1em;
     font-family: "EncodeSans-SemiBold";
-    color: var(--color-2);
+    color: var(--color-1);
 }
 .product__description small{
     margin-top: 2px;
@@ -134,7 +134,7 @@
     background-color: var(--color-3);
     border-radius: 5px;
     width: 100%;
-    color: var(--color-1);
+    color: var(--color-2);
     padding: 16px;
     font-size: 16px;
     cursor: pointer;

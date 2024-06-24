@@ -59,6 +59,7 @@
 }
 .detail__head h1{
     font-family: "EncodeSans-SemiBold";
+    color: var(--color-1);
 }
 .product__select {
     display: flex;
@@ -132,7 +133,7 @@ details {
     padding: var(--space-layout-padding-lr);
 }
 .footer__ul{
-    background: var(--color-4);
+    background: var(--color-2);
     height: 55px;
     display: flex;
     flex-direction: row;

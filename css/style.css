@@ -114,7 +114,7 @@
 .nav__ul li a:hover{
     /* filter: invert(1); */
     transition: all 2s ease 0.2s;
-    background-color: blueviolet;
+    background-color: rgb(43, 153, 226);
 }
 .nav__ul li a span{
     white-space: nowrap;
