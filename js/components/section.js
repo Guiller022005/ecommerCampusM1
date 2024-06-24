@@ -1,4 +1,4 @@
-export const titleProductDetail = async({ data:dataUpdate } = res)=>{
+export const titleProductDetail = async ({ data: dataUpdate } = res) => {
     return /*html*/`
         <article class="article__detail">
             <div class="detail__head">
@@ -10,18 +10,17 @@ export const titleProductDetail = async({ data:dataUpdate } = res)=>{
                 </div>
             </div>
             <div class="detail__score">
-                ${
-                  dataUpdate.product_star_rating !== null && dataUpdate.product_star_rating !== undefined
-                    ? new Array(parseInt(dataUpdate.product_star_rating)).fill(`<img src="../storage/img/star.svg">`).join('')
-                    :''
-                }
+                ${dataUpdate.product_star_rating !== null && dataUpdate.product_star_rating !== undefined
+            ? new Array(parseInt(dataUpdate.product_star_rating)).fill(`<img src="../storage/img/star.svg">`).join('')
+            : ''
+        }
                 <span>${dataUpdate.product_star_rating}</span>
                 <a href="${dataUpdate.product_url}">(${dataUpdate.product_num_ratings} reviews)</a>
             </div>
         </article>`;
 }
 
-export const buttonAtcProductDetial = async({ data:dataUpdate} = res) =>{
+export const buttonAtcProductDetial = async ({ data: dataUpdate } = res) => {
     return /*html*/`
         <li>
             <a href="../index.html" id="add__to__cart">
@@ -93,8 +92,8 @@ export const billProductCheckout = async (totalItems, totalPrice) => {
     `;
 };
 
-export const productDetail = async(res)=>{
-    let {data} = res;
+export const productDetail = async (res) => {
+    let { data } = res;
     let {
         category_path,
         about_product,
@@ -114,13 +113,13 @@ export const productDetail = async(res)=>{
     if (dataUpdate.product_description) {
         string1 = dataUpdate.product_description.slice(0, 165);
         string2 = dataUpdate.product_description.slice(165);
-    }else{
-        string1=("Not description")
+    } else {
+        string1 = ("Not description")
     }
 
     return /*html*/`
     <details>
-        <summary>${( dataUpdate.product_description && dataUpdate.product_description.length >= 165) ? string1+"...<b>Read more</b>" : string1}</summary>
+        <summary>${(dataUpdate.product_description && dataUpdate.product_description.length >= 165) ? string1 + "...<b>Read more</b>" : string1}</summary>
         <p>${string2}</p>
     </details>`;
 }

@@ -236,3 +236,13 @@
     /* background: violet; */
     margin-top: -54px;
 }
+.cart-counter {
+    position: absolute;
+    top: 10px;
+    left: 40vw;
+    background-color: red; /* Color de fondo del contador */
+    color: white; /* Color de texto del contador */
+    font-size: 12px; /* Tamaño de fuente del contador */
+    padding: 2px 5px; /* Espaciado interior del contador */
+    border-radius: 50%; /* Forma del contador (círculo) */
+}

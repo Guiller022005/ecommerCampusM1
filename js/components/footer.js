@@ -26,23 +26,21 @@ export const buttonCartDetails = async(res)=>{
     </li>`;
 }
 
-export const footerIndex = async (res) =>{
-    let plantilla =""
-    let valTotalItems = "";
-    if (res.totalItems > 0) {
-        valTotalItems = res.totalItems;
-    } 
-    
+export const footerIndex = async () => {
+    let plantilla = "";
+
+    // Contar el número de productos en el carrito
+    let productCount = Object.keys(sessionStorage).length;
 
     plantilla += /*html*/`
     <li>
-    <a href="#">
-        <img src="storage/img/homeSelect.svg" alt="">
-    </a>
+        <a href="#">
+            <img src="storage/img/homeSelect.svg" alt="">
+        </a>
     </li>
     <li>
         <a href="views/checkout.html">
-            <span style ="color: white" >${valTotalItems} </span>
+            <span class="cart-counter">${productCount}</span>
             <img src="storage/img/bag.svg" alt="">
         </a>
     </li>
@@ -55,6 +53,9 @@ export const footerIndex = async (res) =>{
         <a href="#">
             <img src="storage/img/profile.svg" alt="">
         </a>
-    </li>`
+    </li>`;
+
     return plantilla;
 }
+
+

@@ -60,3 +60,25 @@ addEventListener("DOMContentLoaded", async e=>{
 })
 
 input__search.addEventListener("change", searchProducts);
+
+const updateSessionStorage = (counterValue, index) => {
+    let currentValue = parseInt(counterValue.textContent);
+    let sessionStorageValues = Object.values(sessionStorage);
+    sessionStorageValues.forEach((element) => {
+        if (element !== null && typeof element === 'string') {
+            const data = JSON.parse(element);
+            let info = data.data;
+            if (data.status === 'OK' && data.request_id && info) {
+                info.quantity = currentValue;
+                sessionStorage.setItem(info.asin, JSON.stringify(data));
+            }
+        }
+    });
+
+    // Actualizar el contador de productos en el carrito en el footer
+    let productCount = Object.keys(sessionStorage).length;
+    const footerCartCounter = document.querySelector('.cart-counter');
+    if (footerCartCounter) {
+        footerCartCounter.textContent = productCount.toString();
+    }
+};
