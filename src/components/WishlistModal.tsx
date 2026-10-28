@@ -56,7 +56,16 @@ export const WishlistModal: React.FC<WishlistModalProps> = ({
                     onOpenDetails(product);
                   }}
                 >
-                  <img src={product.main_photo} alt={product.title} />
+                  <img
+                    src={product.main_photo}
+                    alt={product.title}
+                    onError={(e) => {
+                      const current = e.currentTarget.getAttribute('src') || '';
+                      if (current.startsWith('/')) {
+                        e.currentTarget.src = '.' + current;
+                      }
+                    }}
+                  />
                 </div>
                 <div
                   className="item-details cursor-pointer"

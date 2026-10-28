@@ -45,6 +45,12 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 src={photos[activePhotoIndex]}
                 alt={product.title}
                 className="gallery-active-photo"
+                onError={(e) => {
+                  const current = e.currentTarget.getAttribute('src') || '';
+                  if (current.startsWith('/')) {
+                    e.currentTarget.src = '.' + current;
+                  }
+                }}
               />
               <button
                 type="button"

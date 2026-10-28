@@ -117,7 +117,16 @@ export const CartDrawer: React.FC = () => {
               {cart.map((item) => (
                 <div key={item.product.id} className="drawer-item">
                   <div className="item-thumb">
-                    <img src={item.product.main_photo} alt={item.product.title} />
+                    <img
+                      src={item.product.main_photo}
+                      alt={item.product.title}
+                      onError={(e) => {
+                        const current = e.currentTarget.getAttribute('src') || '';
+                        if (current.startsWith('/')) {
+                          e.currentTarget.src = '.' + current;
+                        }
+                      }}
+                    />
                   </div>
                   <div className="item-details">
                     <h4 className="item-title">{item.product.title}</h4>

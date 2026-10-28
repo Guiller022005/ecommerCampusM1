@@ -16,6 +16,21 @@ export const supabase = isSupabaseConfigured
   ? createClient(supabaseUrl, supabaseAnonKey)
   : null;
 
+/**
+ * Universal Asset URL resolver for local dev and GitHub Pages subpaths
+ */
+export function getAssetUrl(url?: string): string {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+    return url;
+  }
+  const clean = url.replace(/^(\/|\.\/)/, '');
+  const baseUrl = import.meta.env.BASE_URL || './';
+  const prefix = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+  return `${prefix}${clean}`;
+}
+
+
 // Built-in Mock Data matching database/ecommerce.sql exactly
 export const initialCategories: Category[] = [
   { id: 'aps', name: 'All Items', icon: 'grid', display_order: 1 },
@@ -331,9 +346,17 @@ export async function fetchProducts(
       if (!error && data && data.length > 0) {
         return data.map((row: any) => ({
           ...row,
-          photos: row.product_photos?.map((p: any) => p.photo_url) || [row.main_photo],
-          sizes: row.product_variations?.filter((v: any) => v.variation_type === 'SIZE').map((v: any) => v.variation_value) || ['S', 'M', 'L'],
-          colors: row.product_variations?.filter((v: any) => v.variation_type === 'COLOR').map((v: any) => v.variation_value) || ['#0F172A', '#4F46E5'],
+          main_photo: getAssetUrl(row.main_photo),
+          photos:
+            row.product_photos && row.product_photos.length > 0
+              ? row.product_photos.map((p: any) => getAssetUrl(p.photo_url))
+              : [getAssetUrl(row.main_photo)],
+          sizes:
+            row.product_variations?.filter((v: any) => v.variation_type === 'SIZE').map((v: any) => v.variation_value) ||
+            ['S', 'M', 'L'],
+          colors:
+            row.product_variations?.filter((v: any) => v.variation_type === 'COLOR').map((v: any) => v.variation_value) ||
+            ['#0F172A', '#4F46E5'],
         })) as Product[];
       }
     } catch (e) {
@@ -394,7 +417,11 @@ export async function fetchProducts(
     }
   }
 
-  return result;
+  return result.map((p) => ({
+    ...p,
+    main_photo: getAssetUrl(p.main_photo),
+    photos: p.photos ? p.photos.map((ph) => getAssetUrl(ph)) : [getAssetUrl(p.main_photo)],
+  }));
 }
 
 /**

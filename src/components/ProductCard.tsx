@@ -32,6 +32,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             alt={product.title}
             loading="lazy"
             className="product-thumb"
+            onError={(e) => {
+              const current = e.currentTarget.getAttribute('src') || '';
+              if (current.startsWith('/')) {
+                e.currentTarget.src = '.' + current;
+              }
+            }}
           />
         </button>
 
