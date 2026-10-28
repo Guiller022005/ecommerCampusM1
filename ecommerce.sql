@@ -116,6 +116,19 @@ CREATE POLICY "Public Insert Order Items" ON order_items FOR INSERT WITH CHECK (
 CREATE POLICY "Public Read Order Items" ON order_items FOR SELECT USING (true);
 
 -- =======================================================
+-- GRANTS FOR SUPABASE ROLES (anon & authenticated)
+-- Required by PostgreSQL to avoid 42501 "permission denied"
+-- =======================================================
+GRANT USAGE ON SCHEMA public TO anon, authenticated;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO anon, authenticated;
+GRANT INSERT, UPDATE ON TABLE customers, orders, order_items TO anon, authenticated;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO anon, authenticated;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT USAGE, SELECT ON SEQUENCES TO anon, authenticated;
+
+
+-- =======================================================
 -- INITIAL SEED DATA
 -- =======================================================
 INSERT INTO categories (id, name, icon, display_order) VALUES
