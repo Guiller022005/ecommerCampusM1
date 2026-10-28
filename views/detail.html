@@ -2,87 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Product Details | Campus Store</title>
+    <meta name="description" content="View product specifications, gallery, available sizes, colors, and add to cart at Campus Store.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/detail.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="../js/detail.js" defer></script>
 </head>
 <body>
-    <main class="main">
-        <section id="main__section_gallery" class="main__section">
-            <!-- <article class="article__product">
-                <div class="product__image">
-                    <img src="../storage/img/img3.svg">
+    <div class="main-wrapper">
+        <main class="main">
+            <div class="detail-layout">
+                <!-- Left Column: Gallery Carousel -->
+                <section id="main__section_gallery" class="main__section">
+                    <!-- Populated dynamically with gallery and skeleton -->
+                </section>
+
+                <!-- Right Column: Information, Variations and Actions -->
+                <div class="product-info-col">
+                    <section id="main__section__title" class="main__section">
+                        <!-- Populated dynamically with title and score -->
+                    </section>
+
+                    <section id="main__section__information" class="main__section">
+                        <article class="product__information">
+                            <!-- Populated dynamically with description -->
+                        </article>
+                    </section>
+
+                    <section class="main__section">
+                        <article class="product__custom">
+                            <!-- Populated dynamically with sizes and colors -->
+                        </article>
+                    </section>
                 </div>
-                <div class="product__menu">
-                    <a href="../">
-                        <img src="../storage/img/back.svg">
-                    </a>
-                    <img src="../storage/img/heartblack.svg">
-                </div>
-            </article> -->
-        </section>
-        <section id="main__section__title" class="main__section">
-            <!-- <article class="article__detail">
-                <div class="detail__head">
-                    <h1>Modern light clothes</h1>
-                    <div class="product__select">
-                        <img src="../storage/img/minus.svg">
-                        <span>1</span>
-                        <img src="../storage/img/plus.svg">
-                    </div>
-                </div>
-                <div class="detail__score">
-                    <img src="../storage/img/star.svg">
-                    <img src="../storage/img/star.svg">
-                    <img src="../storage/img/star.svg">
-                    <img src="../storage/img/star.svg">
-                    <img src="../storage/img/star.svg">
-                    <span>5.0</span>
-                    <p>(<a href="#">7.932 reviews</a>)</p>
-                </div>
-            </article> -->
-        </section>
-        <section id="main__section__information" class="main__section">
-            <article class="product__information">
-                <!-- <details>
-                    <summary>Click me</summary>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos officia necessitatibus non alias, consequatur debitis vel minus quaerat iste molestias, repellat aliquid, ipsa atque quas corporis iusto consectetur vitae? Maxime!</p>
-                </details> -->
-            <hr> 
-        </section>
-        <section class="main__section">
-            <article class="product__custom">
-                <div class="product__size">
-                    <!-- <h5>Choose Size</h5>
-                    <div>
-                        <img src="../storage/img/sizeS.svg">
-                        <img src="../storage/img/sizeM.svg">
-                        <img src="../storage/img/sizeL.svg">
-                        <img src="../storage/img/sizeXL.svg">
-                    </div> -->
-                </div>
-                <div class="product__color">
-                    <!-- <h5>Color</h5>
-                    <div>
-                        <img src="../storage/img/color1.svg">
-                        <img src="../storage/img/color2.svg">
-                        <img src="../storage/img/color3.svg">
-                    </div> -->
-                </div>
-            </article>
-        </section>
-    </main>
-    <footer id="footer__section__price" class="footer">
-        <ul class="footer__ul">
-            <!-- <li>
-                <a href="./checkout.html">
-                    <img src="../storage/img/shoppingcar.svg">
-                    <span>Add to Cart | $100.99 <sub><del>$190.99</del></sub></span>
-                </a>
-            </li> -->
-        </ul>
-    </footer>
+            </div>
+        </main>
+
+        <!-- Sticky Add to Cart Footer -->
+        <footer id="footer__section__price" class="footer">
+            <ul class="footer__ul">
+                <!-- Populated dynamically with Add to Cart CTA -->
+            </ul>
+        </footer>
+    </div>
 </body>
 </html>

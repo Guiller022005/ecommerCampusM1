@@ -1,24 +1,55 @@
-:root{
-    /* --color-1: red;
-    --color-2: blue;
-    --color-4: green; */
-    --color-1: #c242b7;
-    --color-2: #4772b6;
-    --color-3: #A4AAAD;
-    --color-4: #111111;
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    /* Brand & Accent Color System */
+    --color-primary: #0F172A;        /* Slate 900 */
+    --color-accent: #4F46E5;         /* Indigo 600 */
+    --color-accent-hover: #4338CA;   /* Indigo 700 */
+    --color-accent-soft: #EEF2FF;    /* Indigo 50 */
+    --color-bg: #F8FAFC;             /* Clean porcelain slate */
+    --color-card: #FFFFFF;           /* Pure White */
+    --color-text: #0F172A;           /* Slate 900 */
+    --color-muted: #64748B;          /* Slate 500 */
+    --color-light: #94A3B8;          /* Slate 400 */
+    --color-border: #E2E8F0;         /* Slate 200 */
+    --color-star: #F59E0B;           /* Amber 500 */
+    --color-danger: #EF4444;         /* Rose Red */
+    --color-success: #10B981;        /* Emerald Green */
+
+    /* Legacy compatibility mappings */
+    --color-1: #0F172A;
+    --color-2: #4F46E5;
+    --color-3: #64748B;
+    --color-4: #1E293B;
     --color-5: #FFFFFF;
-    --space-layout-padding-lr: 0px 15px;
-    --space-layout-padding-t: 5px; 
-    --layout-imagen-width:100%;
-    --layout-imagen-height:350px;
 
-    --layout-imagen-width-detail:100%;
-    --layout-imagen-height-detail:385px;
+    /* Typography */
+    --font-main: 'Plus Jakarta Sans', 'EncodeSans-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'Plus Jakarta Sans', 'EncodeSans-Bold', sans-serif;
 
-    --layout-imagen-width-checkout:70px;
-    --layout-imagen-height-checkout:70px;
+    /* Responsive Layout Widths */
+    --container-max-width: 1240px;
+    --space-layout-padding-lr: 0px 24px;
+    --space-layout-padding-t: 16px;
 
+    /* Border Radii */
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+    --shadow-md: 0 4px 14px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+    --shadow-lg: 0 12px 28px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+    --shadow-float: 0 16px 36px -6px rgba(15, 23, 42, 0.28), 0 6px 16px -2px rgba(15, 23, 42, 0.12);
+
+    /* Transitions */
+    --transition-fast: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Local fallback fonts */
 @font-face {
     font-family: "EncodeSans-Regular";
     src: url("../storage/font/encode-sans/EncodeSans-Regular.ttf");
@@ -34,4 +65,21 @@
 @font-face {
     font-family: "EncodeSans-Bold";
     src: url("../storage/font/encode-sans/EncodeSans-Bold.ttf");
+}
+
+/* Shimmer Animation Keyframes */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.skeleton-shimmer {
+    background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite ease-in-out;
+    border-radius: var(--radius-sm);
 }

@@ -1,107 +1,88 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Checkout | Campus Store</title>
+    <meta name="description" content="Review your order, select shipping details, choose payment method, and complete your purchase securely.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/checkout.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="../js/checkout.js" defer></script>
 </head>
 <body>
-    <header class="header">
-        <nav class="header__nav">
-            <div>
-                <a href="../index.html">
-                    <img src="../storage/img/backcheck.svg">
+    <div class="main-wrapper">
+        <header class="header">
+            <nav class="header__nav" aria-label="Checkout Navigation">
+                <a href="../index.html" class="nav-back-link" title="Back to Catalog">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
                 </a>
+                <div class="header-title">Checkout</div>
+                <div class="header-menu-btn" title="Options">
+                    <img src="../storage/img/menudespliegue.svg" alt="Options">
+                </div>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="checkout-grid">
+                <!-- Left Column: Cart Items List -->
+                <section class="checkout__details" aria-label="Cart Items">
+                    <!-- Dynamically populated with cart items or empty state -->
+                </section>
+
+                <!-- Right Column: Shipping, Payment & Summary -->
+                <div class="checkout-side-panel">
+                    <section class="section__shopping">
+                        <article class="Shopping__title">
+                            <h3>Payment Method</h3>
+                        </article>
+                        <article class="section__card">
+                            <div class="dropdown">
+                                <div class="dropdown__button" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <div class="shopping__card">
+                                        <img src="../storage/img/visa.svg" alt="Visa">
+                                        <label>Visa ending in 2143</label>
+                                    </div>
+                                    <div class="shopping__option">
+                                        <img src="../storage/img/flechadespliegue.svg" alt="Dropdown Arrow">
+                                    </div>
+                                </div>
+                                <div class="dropdown__content" role="menu">
+                                    <div class="shopping__card" role="menuitem">
+                                        <img src="../storage/img/visa.svg" alt="Visa">
+                                        <label>Visa ending in 2143 (Default)</label>
+                                    </div>
+                                    <div class="shopping__card" role="menuitem">
+                                        <img src="../storage/img/targetaVisa.svg" alt="Mastercard">
+                                        <label>Mastercard ending in 8890</label>
+                                    </div>
+                                    <div class="shopping__card" role="menuitem">
+                                        <img src="../storage/img/bag.svg" alt="Apple Pay">
+                                        <label>Apple Pay</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!-- Order Totals & Breakdown -->
+                    <article class="section__bill" aria-label="Order Summary">
+                        <!-- Populated dynamically -->
+                    </article>
+
+                    <!-- Checkout Button -->
+                    <button type="button" id="btn-pay" class="btn-pay-checkout" role="button" aria-label="Complete Order">
+                        <span>Pay with Confidence</span>
+                    </button>
+                </div>
             </div>
-            <div>Checkout</div>
-            <div>
-                <img src="../storage/img/menudespliegue.svg">
-            </div>
-        </nav>
-    </header>
-    <main class="main">
-        <section class="checkout__details">
-            <!-- <arcticle class="details__product">
-                <div class="product__imagen">
-                    <img src="../storage/img/chekoutima1.svg">
-                </div>
-                <div class="product__description">
-                    <h3>Modern light clothes</h3>
-                    <small>Dress modern</small>
-                    <span>$212.22</span>
-                </div>
-                <div class="product__custom">
-                    <img src="../storage/img/3puntos.svg">
-                    <div class="product__select">
-                        <a href:"" id='aumentar'>
-                            <img src="../storage/img/checkout minus.svg">
-                        </a>
-                        <span>4</span>
-                        <a href:"" id='disminuir'>
-                            <img src="../storage/img/chekout plus.svg">
-                        </a>
-                    </div>
-                </div>
-            </arcticle> -->
-        </section>
-        <section class="section__shopping">
-            <article class="Shopping__title">
-                <h3>Shipping information</h3>
-            </article>
-            <article class="section__card">
-                <div class="dropdown">
-                    <div class="dropdown__button">
-                        <div class="shopping__card">
-                            <img src="../storage/img/visa.svg">
-                            <label>**** **** **** 2143</label>
-                        </div>
-                        <div class="shopping__option">
-                            <img src="../storage/img/flechadespliegue.svg">
-                        </div>
-                    </div>
-                    <div class="dropdown__content">
-                        <div class="shopping__card">
-                            <img src="../storage/img/visa.svg">
-                            <label>**** **** **** 2143</label>
-                        </div>
-                        <div class="shopping__card">
-                            <img src="../storage/img/visa.svg">
-                            <label>**** **** **** 2143</label>
-                        </div>
-                        <div class="shopping__card">
-                            <img src="../storage/img/visa.svg">
-                            <label>**** **** **** 2143</label>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="section__bill">
-                <!-- <div class="bill__total">
-                    <label>Total (${totalItems} items)</label>
-                    <span>$${totalPrice.toFixed(2)}</span>
-                </div>
-                <div class="bill__fee">
-                    <label>Shipping Fee</label>
-                    <span>$.0.00</span>
-                </div>
-                <div class="bill__subtotal">
-                    <label>Sub Total</label>
-                    <span>$${totalPrice.toFixed(2)}</span>
-                </div> -->
-            </article>
-        </section>
-    </main>
-    <footer class="footer">
-        <ul class="footer__ul">
-            <li>
-                <a href="#">
-                    <span>Pay</span>
-                </a>
-            </li>
-        </ul>
-    </footer>
+        </main>
+    </div>
 </body>
 </html>

@@ -1,106 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta id="myMeta" charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Campus Store | Modern Apparel & Accessories</title>
+    <meta name="description" content="Discover modern streetwear, footwear, watches, and premium accessories at Campus Store. Fast delivery and best curated prices.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <script type="module" src="js/main.js" defer></script>
 </head>
 <body>
-    <header class="header">
-        <div class="header__information">
-            <p>Hello, Welcome 👋</p>
-            <span>Guillermo Paúl</span>
-        </div>
-        <div class="header__login">
-            <img src="storage/img/myphoto.png">
-        </div>
-    </header>
-    <nav class="nav">
-        <div class="nav__search">
-            <input id="input_search" type="text" data-opc="random" placeholder="Search clothes. . . ">
-            <span id="search__icon">
-                <img src="storage/img/magnifyingglass.svg">
-            </span>
-        </div>
-        <div class="nav__filter">
-            <a href="#">
-                <img src="storage/img/filter.svg">
-            </a>
-        </div>
-    </nav>
-    <main class="main">
-        <nav class="main__nav">
-            <ul class="nav__ul">
-                <!-- <li class="ul__li">
-                    <a href="#">
-                        <img src="storage/img/categoryHover.svg">
-                        All Items
-                    </a>
-                </li>
-                <li class="ul__li">
-                    <a href="#">
-                        <img src="storage/img/mask.svg" style="filter: invert(1);">
-                        All Items
-                    </a>
-                </li>
-                <li class="ul__li">
-                    <a href="#">
-                        <img src="storage/img/hat.svg">
-                        All Items
-                    </a>
-                </li>
-                <li class="ul__li">
-                    <a href="#">
-                        <img src="storage/img/watch.svg">
-                        All Items
-                    </a> -->
-            </ul>
-        </nav>
-        <article class="main__article">
-            <!-- <section>
-                <div class="section__front_page">
-                    <a href="views/detail.html">
-                        <img src="storage/img/img2.svg">
-                    </a>
-                    <img src="storage/img/heart.svg">
-                </div>
-                <h5>Modern light clothes</h5>
-                <small>Dress modern</small>
-                <div class="section__price">
-                    <span>$212.99</span>
-                    <div class="price__score">
-                        <img src="storage/img/star.svg">
-                        <p>5.0</p>
+    <div class="main-wrapper">
+        <!-- Responsive Header: Desktop Row & Mobile Stack -->
+        <header class="header">
+            <div class="header__brand">
+                <a href="index.html" class="header__brand-link">
+                    <div class="header__logo">CS</div>
+                    <div class="header__brand-text">
+                        <span class="brand-name">Campus Store</span>
+                        <small class="brand-greeting">Welcome back, Guillermo 👋</small>
                     </div>
+                </a>
+            </div>
+
+            <!-- Integrated Search Bar -->
+            <div class="header__search">
+                <div class="nav__search">
+                    <input id="input_search" type="search" placeholder="Search modern clothes, shoes, watches..." autocomplete="off">
+                    <span id="search__icon" title="Search">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </span>
                 </div>
-            </section> -->
-        </article>
-    </main>
-    <footer class="footer">
-        <ul class="footer__ul">
-            <!-- <li>
-                <a href="#">
-                    <img src="storage/img/homeSelect.svg">
+                <button type="button" class="nav__filter" id="btn-filter" title="Filter collection">
+                    <img src="storage/img/filter.svg" alt="Filter icon">
+                </button>
+            </div>
+
+            <!-- Desktop Header Actions: Wishlist, Cart & Profile -->
+            <div class="header__actions">
+                <a href="#wishlist" id="header-wishlist" class="header-action-btn" title="View Wishlist" aria-label="Wishlist">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
                 </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="storage/img/bag.svg">
+
+                <a href="views/checkout.html" class="header-action-btn header-cart-btn" title="Shopping Cart" aria-label="Cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="cart-counter header-cart-badge" style="display: none;">0</span>
                 </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="storage/img/heart.svg">
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="storage/img/profile.svg">
-                </a>
-            </li> -->
-        </ul>
-    </footer>
+
+                <div class="header__login" id="header-profile" title="Guillermo Paúl">
+                    <img src="storage/img/myphoto.png" alt="Profile Avatar">
+                </div>
+            </div>
+        </header>
+
+        <!-- Product Categories -->
+        <main class="main">
+            <nav class="main__nav" aria-label="Product categories">
+                <ul class="nav__ul">
+                    <!-- Category pills populated dynamically -->
+                </ul>
+            </nav>
+
+            <!-- Responsive Product Catalog Grid -->
+            <article class="main__article" aria-label="Product Catalog">
+                <!-- Populated with 4/3/2 column product cards -->
+            </article>
+        </main>
+
+        <!-- Mobile Floating Dock (Hidden on Desktop!) -->
+        <footer class="footer mobile-only-footer">
+            <ul class="footer__ul">
+                <!-- Mobile bottom navigation -->
+            </ul>
+        </footer>
+    </div>
 </body>
 </html>

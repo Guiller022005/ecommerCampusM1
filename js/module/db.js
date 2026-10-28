@@ -1,15 +1,27 @@
-import { getProductId } from "./app.js";
+/**
+ * IndexedDB & Local Storage Helper Utility
+ */
 
-let params = new URLSearchParams(location.search);
-let { data } = await getProductId(params.get("id"));
-let {about_product} = data;
+export const initDB = () => {
+    return new Promise((resolve, reject) => {
+        if (!window.indexedDB) {
+            console.warn("IndexedDB not supported, falling back to localStorage");
+            resolve(null);
+            return;
+        }
 
-export const openRequest = indexedDB.open("storage", 1);
-openRequest.onupgradeneeded = async () => {
- 
-    if (!db.objectStoreNames.contains('books')) { // si no hay un almacén de libros ("books"),
-      db.createObjectStore('books', {keyPath: 'id'}); // crearlo
-    }
-}
+        const request = indexedDB.open("ecommerce_db", 1);
+        request.onupgradeneeded = (e) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains("cart")) {
+                db.createObjectStore("cart", { keyPath: "asin" });
+            }
+            if (!db.objectStoreNames.contains("favorites")) {
+                db.createObjectStore("favorites", { keyPath: "asin" });
+            }
+        };
 
-let db = openRequest.result;
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => resolve(null);
+    });
+};
