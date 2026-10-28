@@ -80,7 +80,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Profile Avatar */}
         <div className="user-avatar" title="Guillermo Paúl">
-          <img src="/storage/img/myphoto.png" alt="Guillermo Paúl" />
+          <img src="./storage/img/myphoto.png" alt="Guillermo Paúl" />
         </div>
       </div>
     </header>

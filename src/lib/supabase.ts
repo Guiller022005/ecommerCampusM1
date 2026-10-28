@@ -38,11 +38,11 @@ export const initialProducts: Product[] = [
     currency: 'USD',
     star_rating: 4.8,
     num_ratings: 9537,
-    main_photo: '/storage/img/img1.svg',
+    main_photo: './storage/img/img1.svg',
     photos: [
-      '/storage/img/img1.svg',
-      '/storage/img/img2.svg',
-      '/storage/img/img3.svg',
+      './storage/img/img1.svg',
+      './storage/img/img2.svg',
+      './storage/img/img3.svg',
     ],
     description:
       'Designed for comfort and effortless modern style. Lightweight breathable mesh lining with high-resilience EVA sole for all-day comfort and stability in any urban setting.',
@@ -62,11 +62,11 @@ export const initialProducts: Product[] = [
     currency: 'USD',
     star_rating: 4.9,
     num_ratings: 3914,
-    main_photo: '/storage/img/img2.svg',
+    main_photo: './storage/img/img2.svg',
     photos: [
-      '/storage/img/img2.svg',
-      '/storage/img/img1.svg',
-      '/storage/img/img4.svg',
+      './storage/img/img2.svg',
+      './storage/img/img1.svg',
+      './storage/img/img4.svg',
     ],
     description:
       'Inspired by the iconic Air Max 90, these shoes celebrate a classic through a fresh lens. Visible Air unit delivers lightweight cushioning with durable synthetic leather overlays.',
@@ -86,11 +86,11 @@ export const initialProducts: Product[] = [
     currency: 'USD',
     star_rating: 4.6,
     num_ratings: 5078,
-    main_photo: '/storage/img/img4.svg',
+    main_photo: './storage/img/img4.svg',
     photos: [
-      '/storage/img/img4.svg',
-      '/storage/img/img1.svg',
-      '/storage/img/img2.svg',
+      './storage/img/img4.svg',
+      './storage/img/img1.svg',
+      './storage/img/img2.svg',
     ],
     description:
       'Breathable mesh upper with synthetic overlays for added structure. Plush collar foam and responsive EVA midsole to absorb impact with durable solid rubber herringbone outsole.',
@@ -110,11 +110,11 @@ export const initialProducts: Product[] = [
     currency: 'USD',
     star_rating: 4.7,
     num_ratings: 1167,
-    main_photo: '/storage/img/img3.svg',
+    main_photo: './storage/img/img3.svg',
     photos: [
-      '/storage/img/img3.svg',
-      '/storage/img/img5.svg',
-      '/storage/img/chekoutima1.svg',
+      './storage/img/img3.svg',
+      './storage/img/img5.svg',
+      './storage/img/chekoutima1.svg',
     ],
     description:
       'Crafted from premium water-repellent cotton blend. Features double-breasted closure, storm flap, tailored lapels, and comfortable relaxed silhouette for all seasons.',
@@ -134,11 +134,11 @@ export const initialProducts: Product[] = [
     currency: 'USD',
     star_rating: 4.5,
     num_ratings: 663,
-    main_photo: '/storage/img/img5.svg',
+    main_photo: './storage/img/img5.svg',
     photos: [
-      '/storage/img/img5.svg',
-      '/storage/img/img3.svg',
-      '/storage/img/chekoutima1.svg',
+      './storage/img/img5.svg',
+      './storage/img/img3.svg',
+      './storage/img/chekoutima1.svg',
     ],
     description:
       '100% natural breathable European linen with buttoned cuffs and dual chest pockets. Ideal layering piece for casual weekends or modern office attire.',
@@ -158,11 +158,11 @@ export const initialProducts: Product[] = [
     currency: 'USD',
     star_rating: 4.8,
     num_ratings: 1297,
-    main_photo: '/storage/img/chekoutima1.svg',
+    main_photo: './storage/img/chekoutima1.svg',
     photos: [
-      '/storage/img/chekoutima1.svg',
-      '/storage/img/img5.svg',
-      '/storage/img/img3.svg',
+      './storage/img/chekoutima1.svg',
+      './storage/img/img5.svg',
+      './storage/img/img3.svg',
     ],
     description:
       'Heavyweight cotton-poly fleece blend with ribbed cuffs and hem. Features clean embroidered minimalist logo and adjustable double-layered hood.',
@@ -182,10 +182,10 @@ export const initialProducts: Product[] = [
     currency: 'USD',
     star_rating: 4.9,
     num_ratings: 2874,
-    main_photo: '/storage/img/checkout ima2.svg',
+    main_photo: './storage/img/checkout ima2.svg',
     photos: [
-      '/storage/img/checkout ima2.svg',
-      '/storage/img/img2.svg',
+      './storage/img/checkout ima2.svg',
+      './storage/img/img2.svg',
     ],
     description:
       'Sleek matte black 42mm stainless steel case, Japanese quartz movement, scratch-resistant sapphire crystal glass, and genuine Italian leather quick-release strap.',
@@ -205,10 +205,10 @@ export const initialProducts: Product[] = [
     currency: 'USD',
     star_rating: 4.6,
     num_ratings: 840,
-    main_photo: '/storage/img/chekout ima3.svg',
+    main_photo: './storage/img/chekout ima3.svg',
     photos: [
-      '/storage/img/chekout ima3.svg',
-      '/storage/img/img1.svg',
+      './storage/img/chekout ima3.svg',
+      './storage/img/img1.svg',
     ],
     description:
       '100% premium Australian wool felt fedora featuring an authentic leather band and interior moisture-wicking sweatband. UPF 50+ sun protection.',
@@ -228,10 +228,10 @@ export const initialProducts: Product[] = [
     currency: 'USD',
     star_rating: 4.9,
     num_ratings: 3120,
-    main_photo: '/storage/img/bag.svg',
+    main_photo: './storage/img/bag.svg',
     photos: [
-      '/storage/img/bag.svg',
-      '/storage/img/img3.svg',
+      './storage/img/bag.svg',
+      './storage/img/img3.svg',
     ],
     description:
       'Ergonomic water-resistant Oxford fabric with padded 16-inch laptop compartment, hidden anti-theft back pocket, and integrated USB charging port.',
