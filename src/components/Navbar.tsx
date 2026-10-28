@@ -1,19 +1,20 @@
 import React from 'react';
-import { Search, Heart, ShoppingBag, SlidersHorizontal, Database } from 'lucide-react';
+import { Search, Heart, ShoppingBag, SlidersHorizontal } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { isSupabaseConfigured } from '../lib/supabase';
 
 interface NavbarProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
-  onOpenSupabaseModal: () => void;
+  onOpenFilter: () => void;
+  activeFilterCount: number;
   onOpenWishlist: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   searchQuery,
   setSearchQuery,
-  onOpenSupabaseModal,
+  onOpenFilter,
+  activeFilterCount,
   onOpenWishlist,
 }) => {
   const { totalItems, wishlist, setIsCartOpen } = useCart();
@@ -40,27 +41,19 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
         <button
           type="button"
-          className="filter-btn"
-          title="Filter Products"
-          onClick={() => {}}
+          className={`filter-btn ${activeFilterCount > 0 ? 'has-active-filters' : ''}`}
+          title="Filtrar y Ordenar Productos"
+          onClick={onOpenFilter}
+          aria-label="Filtrar y ordenar"
         >
           <SlidersHorizontal size={18} />
+          {activeFilterCount > 0 && (
+            <span className="filter-count-badge">{activeFilterCount}</span>
+          )}
         </button>
       </div>
 
       <div className="header-actions">
-        {/* Supabase Status Pill */}
-        <button
-          type="button"
-          className={`supabase-badge ${isSupabaseConfigured ? 'connected' : 'offline'}`}
-          onClick={onOpenSupabaseModal}
-          title="Supabase Database Status"
-        >
-          <Database size={15} />
-          <span>{isSupabaseConfigured ? 'Supabase Connected' : 'Local Seed DB'}</span>
-          <span className="status-dot"></span>
-        </button>
-
         {/* Wishlist Button */}
         <button
           type="button"

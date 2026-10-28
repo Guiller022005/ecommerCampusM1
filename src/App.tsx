@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Heart, ShoppingBag, User, Sparkles } from 'lucide-react';
+import { Home, Heart, ShoppingBag, SlidersHorizontal, Sparkles, X } from 'lucide-react';
 import { fetchCategories, fetchProducts } from './lib/supabase';
-import type { Category, Product } from './types';
+import type { Category, Product, FilterOptions } from './types';
+import { defaultFilters } from './types';
 import { useCart } from './context/CartContext';
 import { Navbar } from './components/Navbar';
 import { CategoryBar } from './components/CategoryBar';
@@ -10,7 +11,7 @@ import { SkeletonGrid } from './components/SkeletonGrid';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { CartDrawer } from './components/CartDrawer';
 import { WishlistModal } from './components/WishlistModal';
-import { SupabaseModal } from './components/SupabaseModal';
+import { FilterModal } from './components/FilterModal';
 
 export const App: React.FC = () => {
   const { totalItems, wishlist, setIsCartOpen, toastMessage } = useCart();
@@ -22,8 +23,19 @@ export const App: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  const [isSupabaseModalOpen, setIsSupabaseModalOpen] = useState(false);
+  // Filter State
+  const [filters, setFilters] = useState<FilterOptions>(defaultFilters);
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [isWishlistModalOpen, setIsWishlistModalOpen] = useState(false);
+
+  // Active filter count
+  const activeFilterCount =
+    (filters.sortBy !== defaultFilters.sortBy ? 1 : 0) +
+    (filters.minPrice > 0 ? 1 : 0) +
+    (filters.maxPrice < 200 ? 1 : 0) +
+    (filters.onlyInStock ? 1 : 0) +
+    (filters.onlyBestSellers ? 1 : 0) +
+    (filters.minRating > 0 ? 1 : 0);
 
   // Load Categories on mount
   useEffect(() => {
@@ -32,11 +44,11 @@ export const App: React.FC = () => {
     });
   }, []);
 
-  // Fetch Products whenever Category or Search Query changes (with debounce)
+  // Fetch Products whenever Category, Search Query, or Filters change
   useEffect(() => {
     setLoading(true);
     const timer = setTimeout(() => {
-      fetchProducts(activeCategoryId, searchQuery)
+      fetchProducts(activeCategoryId, searchQuery, filters)
         .then((prods) => {
           setProducts(prods);
         })
@@ -46,7 +58,37 @@ export const App: React.FC = () => {
     }, 250);
 
     return () => clearTimeout(timer);
-  }, [activeCategoryId, searchQuery]);
+  }, [activeCategoryId, searchQuery, filters]);
+
+  // Remove individual filter helper
+  const handleRemoveFilterTag = (type: string) => {
+    switch (type) {
+      case 'sort':
+        setFilters((prev) => ({ ...prev, sortBy: defaultFilters.sortBy }));
+        break;
+      case 'price':
+        setFilters((prev) => ({ ...prev, minPrice: 0, maxPrice: 200 }));
+        break;
+      case 'rating':
+        setFilters((prev) => ({ ...prev, minRating: 0 }));
+        break;
+      case 'in_stock':
+        setFilters((prev) => ({ ...prev, onlyInStock: false }));
+        break;
+      case 'best_sellers':
+        setFilters((prev) => ({ ...prev, onlyBestSellers: false }));
+        break;
+      default:
+        break;
+    }
+  };
+
+  const sortLabelMap: Record<string, string> = {
+    'price-asc': 'Precio: Menor a Mayor',
+    'price-desc': 'Precio: Mayor a Menor',
+    'rating-desc': 'Mejor Calificados',
+    'best-sellers': 'Más Vendidos',
+  };
 
   return (
     <div className="app-shell">
@@ -64,7 +106,8 @@ export const App: React.FC = () => {
         <Navbar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
-          onOpenSupabaseModal={() => setIsSupabaseModalOpen(true)}
+          onOpenFilter={() => setIsFilterModalOpen(true)}
+          activeFilterCount={activeFilterCount}
           onOpenWishlist={() => setIsWishlistModalOpen(true)}
         />
 
@@ -77,6 +120,79 @@ export const App: React.FC = () => {
           }}
         />
 
+        {/* Active Filter Tags Bar (Shown when any filter is active) */}
+        {activeFilterCount > 0 && (
+          <div className="active-filters-bar">
+            <span className="active-filters-label">Filtros aplicados:</span>
+            <div className="active-tags-list">
+              {filters.sortBy !== 'featured' && (
+                <button
+                  type="button"
+                  className="filter-tag-chip"
+                  onClick={() => handleRemoveFilterTag('sort')}
+                >
+                  <span>{sortLabelMap[filters.sortBy]}</span>
+                  <X size={13} />
+                </button>
+              )}
+
+              {(filters.minPrice > 0 || filters.maxPrice < 200) && (
+                <button
+                  type="button"
+                  className="filter-tag-chip"
+                  onClick={() => handleRemoveFilterTag('price')}
+                >
+                  <span>
+                    Precio: ${filters.minPrice} – ${filters.maxPrice >= 200 ? '200+' : filters.maxPrice}
+                  </span>
+                  <X size={13} />
+                </button>
+              )}
+
+              {filters.minRating > 0 && (
+                <button
+                  type="button"
+                  className="filter-tag-chip"
+                  onClick={() => handleRemoveFilterTag('rating')}
+                >
+                  <span>★ {filters.minRating}+</span>
+                  <X size={13} />
+                </button>
+              )}
+
+              {filters.onlyInStock && (
+                <button
+                  type="button"
+                  className="filter-tag-chip"
+                  onClick={() => handleRemoveFilterTag('in_stock')}
+                >
+                  <span>En Stock</span>
+                  <X size={13} />
+                </button>
+              )}
+
+              {filters.onlyBestSellers && (
+                <button
+                  type="button"
+                  className="filter-tag-chip"
+                  onClick={() => handleRemoveFilterTag('best_sellers')}
+                >
+                  <span>Best Sellers</span>
+                  <X size={13} />
+                </button>
+              )}
+
+              <button
+                type="button"
+                className="clear-all-tags-btn"
+                onClick={() => setFilters(defaultFilters)}
+              >
+                Limpiar todo
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Main Content Catalog */}
         <main className="main-catalog">
           {loading ? (
@@ -84,17 +200,18 @@ export const App: React.FC = () => {
           ) : products.length === 0 ? (
             <div className="empty-catalog-state">
               <div className="empty-icon">🔍</div>
-              <h3>No products found</h3>
-              <p>We couldn't find items matching your search. Try another query or category.</p>
+              <h3>No se encontraron productos</h3>
+              <p>No hay artículos que coincidan con tus filtros o término de búsqueda.</p>
               <button
                 type="button"
                 className="btn-reset-filters"
                 onClick={() => {
                   setSearchQuery('');
                   setActiveCategoryId('aps');
+                  setFilters(defaultFilters);
                 }}
               >
-                Browse All Items
+                Restablecer y Ver Todo
               </button>
             </div>
           ) : (
@@ -119,9 +236,10 @@ export const App: React.FC = () => {
           onClick={() => {
             setActiveCategoryId('aps');
             setSearchQuery('');
+            setFilters(defaultFilters);
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          title="Home"
+          title="Inicio"
         >
           <Home size={22} />
         </button>
@@ -130,7 +248,7 @@ export const App: React.FC = () => {
           type="button"
           className="dock-item"
           onClick={() => setIsWishlistModalOpen(true)}
-          title="Wishlist"
+          title="Favoritos"
         >
           <Heart size={22} />
           {wishlist.length > 0 && <span className="dock-badge">{wishlist.length}</span>}
@@ -140,7 +258,7 @@ export const App: React.FC = () => {
           type="button"
           className="dock-item"
           onClick={() => setIsCartOpen(true)}
-          title="Cart"
+          title="Carrito"
         >
           <ShoppingBag size={22} />
           {totalItems > 0 && <span className="dock-badge cart-badge">{totalItems}</span>}
@@ -149,10 +267,11 @@ export const App: React.FC = () => {
         <button
           type="button"
           className="dock-item"
-          onClick={() => setIsSupabaseModalOpen(true)}
-          title="Database"
+          onClick={() => setIsFilterModalOpen(true)}
+          title="Filtros"
         >
-          <User size={22} />
+          <SlidersHorizontal size={22} />
+          {activeFilterCount > 0 && <span className="dock-badge">{activeFilterCount}</span>}
         </button>
       </nav>
 
@@ -171,9 +290,13 @@ export const App: React.FC = () => {
         onOpenDetails={(p) => setSelectedProduct(p)}
       />
 
-      <SupabaseModal
-        isOpen={isSupabaseModalOpen}
-        onClose={() => setIsSupabaseModalOpen(false)}
+      <FilterModal
+        isOpen={isFilterModalOpen}
+        onClose={() => setIsFilterModalOpen(false)}
+        currentFilters={filters}
+        onApplyFilters={(newFilters) => setFilters(newFilters)}
+        onResetFilters={() => setFilters(defaultFilters)}
+        resultsCount={products.length}
       />
     </div>
   );

@@ -41,3 +41,24 @@ export interface Order {
   items: CartItem[];
   created_at: string;
 }
+
+export type SortOption = 'featured' | 'price-asc' | 'price-desc' | 'rating-desc' | 'best-sellers';
+
+export interface FilterOptions {
+  sortBy: SortOption;
+  minPrice: number;
+  maxPrice: number;
+  onlyInStock: boolean;
+  onlyBestSellers: boolean;
+  minRating: number;
+}
+
+export const defaultFilters: FilterOptions = {
+  sortBy: 'featured',
+  minPrice: 0,
+  maxPrice: 200,
+  onlyInStock: false,
+  onlyBestSellers: false,
+  minRating: 0,
+};
+

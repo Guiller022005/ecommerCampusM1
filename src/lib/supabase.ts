@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import type { Category, Product, CartItem, Order } from '../types';
+import type { Category, Product, CartItem, Order, FilterOptions } from '../types';
 
 // Read environment variables
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
@@ -271,7 +271,8 @@ export async function fetchCategories(): Promise<Category[]> {
  */
 export async function fetchProducts(
   categoryId = 'aps',
-  searchQuery = ''
+  searchQuery = '',
+  filters?: FilterOptions
 ): Promise<Product[]> {
   if (isSupabaseConfigured && supabase) {
     try {
@@ -286,6 +287,44 @@ export async function fetchProducts(
       }
       if (searchQuery.trim()) {
         query = query.ilike('title', `%${searchQuery.trim()}%`);
+      }
+
+      // Filter options
+      if (filters) {
+        if (filters.minPrice > 0) {
+          query = query.gte('price', filters.minPrice);
+        }
+        if (filters.maxPrice < 200) {
+          query = query.lte('price', filters.maxPrice);
+        }
+        if (filters.onlyInStock) {
+          query = query.eq('in_stock', true);
+        }
+        if (filters.onlyBestSellers) {
+          query = query.eq('is_best_seller', true);
+        }
+        if (filters.minRating > 0) {
+          query = query.gte('star_rating', filters.minRating);
+        }
+
+        // Sorting
+        switch (filters.sortBy) {
+          case 'price-asc':
+            query = query.order('price', { ascending: true });
+            break;
+          case 'price-desc':
+            query = query.order('price', { ascending: false });
+            break;
+          case 'rating-desc':
+            query = query.order('star_rating', { ascending: false });
+            break;
+          case 'best-sellers':
+            query = query.order('is_best_seller', { ascending: false }).order('star_rating', { ascending: false });
+            break;
+          default:
+            query = query.order('created_at', { ascending: false });
+            break;
+        }
       }
 
       const { data, error } = await query;
@@ -318,6 +357,41 @@ export async function fetchProducts(
         (p.subtitle && p.subtitle.toLowerCase().includes(q)) ||
         p.description.toLowerCase().includes(q)
     );
+  }
+
+  if (filters) {
+    if (filters.minPrice > 0) {
+      result = result.filter((p) => p.price >= filters.minPrice);
+    }
+    if (filters.maxPrice < 200) {
+      result = result.filter((p) => p.price <= filters.maxPrice);
+    }
+    if (filters.onlyInStock) {
+      result = result.filter((p) => p.in_stock);
+    }
+    if (filters.onlyBestSellers) {
+      result = result.filter((p) => p.is_best_seller);
+    }
+    if (filters.minRating > 0) {
+      result = result.filter((p) => p.star_rating >= filters.minRating);
+    }
+
+    switch (filters.sortBy) {
+      case 'price-asc':
+        result.sort((a, b) => a.price - b.price);
+        break;
+      case 'price-desc':
+        result.sort((a, b) => b.price - a.price);
+        break;
+      case 'rating-desc':
+        result.sort((a, b) => b.star_rating - a.star_rating);
+        break;
+      case 'best-sellers':
+        result.sort((a, b) => (b.is_best_seller ? 1 : 0) - (a.is_best_seller ? 1 : 0));
+        break;
+      default:
+        break;
+    }
   }
 
   return result;
