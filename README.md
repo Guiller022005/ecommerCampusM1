@@ -1,145 +1,76 @@
-# 🛍️ Campus Store - Modern Mobile-First Ecommerce
+# ⚡ Campus Store - React 19 + TypeScript + Supabase
 
-> Un proyecto de comercio electrónico moderno, pulido y responsivo construido con **HTML5 semántico, CSS3 moderno y Vanilla JavaScript modular**. Diseñado con una experiencia de usuario de primer nivel, animaciones suaves con shimmer skeletons y arquitectura desacoplada lista para bases de datos relacionales SQL.
-
----
-
-## ✨ Características Principales y Mejoras Implementadas
-
-### 1. 🎨 Nueva Paleta de Colores y Diseño Premium
-- **Estética Contemporánea**: Inspirada en boutiques de moda modernas y apps líderes de retail (Zara, Kith, Apple Store).
-- **Tokens de Diseño Centralizados** en [`css/variables.css`](file:///Users/joseguillermopauldiaz/Developments/ecommerCampusM1/css/variables.css):
-  - **Primario / Slate 900**: `#0F172A` (elegancia y contraste profundo).
-  - **Acento / Electric Indigo**: `#4F46E5` (moderno y vibrante).
-  - **Superficie Suave / Fondos**: `#F8FAFC` y `#FFFFFF`.
-  - **Texto Secundario**: `#64748B`.
-  - **Alertas y Descuentos**: `#EF4444` (Rose Red) y `#10B981` (Emerald).
-  - **Calificaciones**: `#F59E0B` (Amber Gold).
-- **Tipografía Moderna**: Integración de la fuente **Plus Jakarta Sans** vía Google Fonts con respaldo local en *Encode Sans*.
-- **Navegación Flotante con Glassmorphism**: Barra inferior translúcida con efecto desenfoque (`backdrop-filter: blur(18px)`) y contador de carrito reactivo en tiempo real.
+> Rama moderna de comercio electrónico migrada a **React 19, TypeScript, Vite y Supabase**, manteniendo la compatibilidad completa con el esquema SQL relacional y preservando la versión original en la rama `main`.
 
 ---
 
-### 2. ⚡ Skeletons y Shimmer Loaders
-- **Transiciones Fluídas**: Se reemplazó la pantalla en blanco y los saltos visuales por placeholders animados con efecto de barrido brillante (`skeleton-shimmer`).
-- **Componente Modular**: [`js/components/skeleton.js`](file:///Users/joseguillermopauldiaz/Developments/ecommerCampusM1/js/components/skeleton.js) con soporte para:
-  - Píldoras de categorías (`categorySkeleton`).
-  - Tarjetas de productos con imagen, título y precio (`productGridSkeleton`).
-  - Vista de detalle con galería, estrellas y descripción (`detailSkeleton`).
-  - Filas de productos y resumen de cobro en checkout (`checkoutSkeleton`).
+## 🚀 Arquitectura y Novedades de la Versión React
+
+### 1. 🗄️ Supabase Cloud Database + Fallback Offline Inteligente
+- **Cliente Supabase Oficial (`@supabase/supabase-js`)** integrado en [`src/lib/supabase.ts`](file:///Users/joseguillermopauldiaz/Developments/ecommerCampusM1/src/lib/supabase.ts).
+- **Esquema Relacional**: El archivo [`database/ecommerce.sql`](file:///Users/joseguillermopauldiaz/Developments/ecommerCampusM1/database/ecommerce.sql) se puede ejecutar directamente en el **SQL Editor** de Supabase para generar tablas (`categories`, `products`, `product_photos`, `product_variations`, `orders`, `order_items`) y poblar el catálogo de inmediato.
+- **Modo Offline Automático**: Si no has configurado tus variables de entorno todavía, la aplicación **funciona al 100% de forma autónoma con datos semilla locales**, por lo que nunca se romperá ni mostrará pantallas en blanco.
+- **Modal de Conexión Supabase**: Incluye un indicador de estado en vivo en el Navbar con guía interactiva en 3 pasos para conectar tu cuenta de Supabase.
 
 ---
 
-### 3. 🗄️ Solución de Base de Datos y API Offline-First
-La API externa (RapidAPI Amazon) que utilizaba el proyecto presentaba problemas de cuotas agotadas, llaves expiradas y latencias impredecibles. Se solucionó con una estrategia dual:
-
-#### A. Motor de Datos Local en Frontend ([`js/module/mockData.js`](file:///Users/joseguillermopauldiaz/Developments/ecommerCampusM1/js/module/mockData.js))
-- Catálogo enriquecido y autónomo con 6 categorías (Moda, Calzado, Relojería, Sombreros, Bolsos y Todo).
-- Datos reales con fotos en galería, variaciones de tallas (S, M, L, XL), muestras de color, reseñas y precios.
-- Simulación de latencia de red controlada (300-350ms) para que los skeletons se aprecien naturalmente.
-- **Funciona al 100% sin depender de un servidor externo** (ideal para despliegue en GitHub Pages, Vercel o Netlify).
-
-#### B. Archivo SQL Completo ([`ecommerce.sql`](file:///Users/joseguillermopauldiaz/Developments/ecommerCampusM1/ecommerce.sql) & [`database/ecommerce.sql`](file:///Users/joseguillermopauldiaz/Developments/ecommerCampusM1/database/ecommerce.sql))
-Diseño relacional estructurado y listo para producción, compatible con **MySQL 8.0+**, **PostgreSQL 14+** y **SQLite 3**:
-- `categories`: Identificador, nombre, icono y orden de visualización.
-- `products`: Catálogo completo, precios, descuento, stock y relación foránea.
-- `product_photos`: Galería de imágenes múltiples por producto.
-- `product_variations`: Tallas y colores asociados a cada producto.
-- `customers`: Registro de usuarios y perfiles.
-- `orders` y `order_items`: Gestión de pedidos, cantidades y totales.
-- Incluye sentencias `INSERT INTO` con todos los datos precargados y consultas SQL frecuentes de analítica.
+### 2. ⚛️ Componentes React y Estado Centralizado
+- **`CartContext` (`src/context/CartContext.tsx`)**: Gestión reactiva de carrito, cantidades (+ / -), cálculo de totales y Wishlist (favoritos) con persistencia en `localStorage`.
+- **`Navbar` (`src/components/Navbar.tsx`)**: Barra de navegación superior con buscador integrado, botón de favoritos con contador, disparador de bolsa de compras con badge numérico, indicador de Supabase y avatar.
+- **`CategoryBar` (`src/components/CategoryBar.tsx`)**: Píldoras horizontales de categorías con íconos vectoriales modernos (Lucide React) y filtrado instantáneo.
+- **`ProductCard` (`src/components/ProductCard.tsx`)**: Tarjetas de producto responsivas con proporción de imagen uniforme, botón de favoritos interactivo, estrellas doradas de calificación, precio con descuento y botón de compra rápida.
+- **`SkeletonGrid` (`src/components/SkeletonGrid.tsx`)**: Animaciones de carga shimmer continuas al filtrar o buscar.
+- **`ProductDetailModal` (`src/components/ProductDetailModal.tsx`)**: Vista detallada con galería de miniaturas, selector de tallas (S, M, L, XL), muestras de color, contador de cantidad y botón *Add to Bag*.
+- **`CartDrawer` (`src/components/CartDrawer.tsx`)**: Cesta lateral desplegable con modificación de cantidades, eliminación de ítems, selector de método de pago (Visa, Mastercard, Apple Pay), cálculo de envío y botón de pago con **animación de confeti (`canvas-confetti`)** y código de orden `#ORD-XXXXXX`.
+- **`WishlistModal` (`src/components/WishlistModal.tsx`)**: Panel lateral para ver productos guardados y transferirlos al carrito con un clic.
 
 ---
 
-### 4. 🛒 Flujos Interactivos Mejorados
-1. **Home (`index.html`)**:
-   - Búsqueda en vivo optimizada con *debounce* (busca al escribir sin congelar la pantalla y sin borrar el texto del input).
-   - Filtrado dinámico por categorías mediante *event delegation* (sin recargar la página).
-   - Botón de favoritos (Wishlist) con persistencia en `localStorage` y animación de rebote.
-   - Estado vacío amigable cuando una búsqueda no arroja resultados.
-2. **Detalle de Producto (`views/detail.html`)**:
-   - Selector interactivo de tallas con píldoras activas.
-   - Muestras de color con selector visual y aro de enfoque.
-   - Contador de cantidad (+ / -) con recálculo automático de precio.
-   - Botón *Add to Cart* integrado con alertas modales de SweetAlert2 y actualización instantánea del carrito.
-   - Paginación de fotos del producto con indicadores en puntos.
-3. **Checkout (`views/checkout.html`)**:
-   - Modificación de cantidades y botón para eliminar producto directamente del carrito.
-   - Dropdown interactivo para seleccionar método de pago (Visa, Mastercard, Apple Pay).
-   - Resumen financiero: Subtotal, Envío gratis (para pedidos calificados) y Total.
-   - Botón de pago con animación de carga (*spinner*) y generación de número de orden simulado (`#ORD-XXXXXX`).
+### 3. 📱 Responsive 100% Adaptativo
+- **En Computadores (> 1080px)**: Grilla de **4 columnas** con espacio optimizado y barra de navegación superior completa. **Sin barra flotante que estorbe el catálogo**.
+- **En Tabletas (680px - 1080px)**: Grilla de **3 columnas** con diseño equilibrado.
+- **En Celulares (< 680px)**: Grilla de **2 columnas** fluidas y barra de navegación táctil inferior en Midnight Slate (`#0F172A`).
 
 ---
 
-## 📁 Estructura del Proyecto
+## 🛠️ Cómo Ejecutar Localmente
 
-```text
-├── css/
-│   ├── variables.css      # Sistema de diseño, tokens, colores, animaciones shimmer
-│   ├── style.css          # Estilos del Home y catálogo general
-│   ├── detail.css         # Estilos de la página de detalle de producto
-│   └── checkout.css       # Estilos de la vista de checkout y carrito
-├── js/
-│   ├── main.js            # Lógica principal del Home y búsqueda
-│   ├── detail.js          # Lógica interactiva del detalle de producto
-│   ├── checkout.js        # Lógica del carrito, cantidades y pago
-│   ├── components/
-│   │   ├── skeleton.js    # Plantillas de carga skeleton animadas
-│   │   ├── gallery.js     # Renderizado de grillas y galerías
-│   │   ├── menu.js        # Barra horizontal de categorías
-│   │   ├── section.js     # Componentes de título, variaciones y resumen
-│   │   └── footer.js      # Barra de navegación flotante y botones de acción
-│   └── module/
-│       ├── mockData.js    # Catálogo estructurado y motor de datos offline
-│       ├── app.js         # Servicios de consulta y filtrado asíncrono
-│       ├── detail.js      # Servicio de detalle de producto por ID/ASIN
-│       └── db.js          # Utilidad auxiliar para almacenamiento
-├── views/
-│   ├── detail.html        # Página de detalle del producto
-│   └── checkout.html      # Página de pasarela de compra y checkout
-├── database/
-│   └── ecommerce.sql      # Script SQL con DDL y DML completo
-├── ecommerce.sql          # Acceso directo al script SQL en raíz
-├── storage/
-│   ├── font/              # Fuentes Encode Sans locales
-│   └── img/               # Iconos SVG e imágenes de productos
-├── index.html             # Punto de entrada de la aplicación
-└── README.md              # Documentación del proyecto
-```
-
----
-
-## 🚀 Cómo Ejecutar el Proyecto Localmente
-
-Dado que el proyecto utiliza módulos de JavaScript estándar (`import`/`export`), debe servirse mediante un servidor HTTP local para evitar restricciones de CORS del protocolo `file://`:
-
-### Opción 1: Con Python (Recomendada)
-Abre tu terminal en la raíz del proyecto y ejecuta:
+### 1. Iniciar el Servidor de Desarrollo Vite
 ```bash
-python3 -m http.server 8080
+npm run dev
 ```
-Luego abre tu navegador en:
-```text
-http://localhost:8080/
-```
+La aplicación estará disponible de inmediato en:
+👉 `http://localhost:5173/`
 
-### Opción 2: Con VS Code / IDE
-- Instala la extensión **Live Server** en VS Code.
-- Haz clic derecho en `index.html` y selecciona **Open with Live Server**.
-
-### Opción 3: Con Node.js / npx
+### 2. Compilar para Producción
 ```bash
-npx serve .
+npm run build
 ```
 
 ---
 
-## 💡 Cómo Usar el Archivo SQL para tu Futuro Backend
+## 🔌 Conectar con tu Cuenta de Supabase (Opcional)
 
-Si en el futuro deseas crear una API con Node.js (Express/NestJS), Python (FastAPI/Django) o PHP:
-1. Abre tu gestor de base de datos preferido (MySQL Workbench, DBeaver, pgAdmin o terminal).
-2. Ejecuta el archivo [`ecommerce.sql`](file:///Users/joseguillermopauldiaz/Developments/ecommerCampusM1/ecommerce.sql):
-   ```bash
-   mysql -u root -p campus_ecommerce < ecommerce.sql
+1. Crea un proyecto gratuito en [supabase.com](https://supabase.com).
+2. Abre el **SQL Editor** en tu panel de Supabase y ejecuta el script [`database/ecommerce.sql`](file:///Users/joseguillermopauldiaz/Developments/ecommerCampusM1/database/ecommerce.sql).
+3. Crea un archivo `.env.local` en la raíz de este proyecto con tus credenciales:
+   ```env
+   VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
+   VITE_SUPABASE_ANON_KEY=tu-anon-key-publica
    ```
-3. Las tablas y los datos de prueba quedarán listos para conectarse con tu backend.
+4. Reinicia `npm run dev` y el indicador en el Navbar cambiará automáticamente a **"Live Supabase Connected"** con un punto verde.
+
+---
+
+## 🔀 Cómo Alternar Entre Versiones
+
+- Para ver la **versión React + Supabase**:
+  ```bash
+  git checkout feat/react-supabase
+  npm run dev
+  ```
+- Para volver a la **versión original Vanilla HTML/CSS/JS**:
+  ```bash
+  git checkout main
+  python3 -m http.server 8080
+  ```
